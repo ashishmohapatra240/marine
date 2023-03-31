@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "542910949988",
+    "project_id": "fishery-6f2a7",
+    "storage_bucket": "fishery-6f2a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:542910949988:android:3946c60053b7bfe31d8d71",
+        "android_client_info": {
+          "package_name": "com.example.marine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "542910949988-j14ussqa47njd1guo42gaqpm2775k465.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR6c9ipUXhr25uXvset18x5MGdzod1a9s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "542910949988-j14ussqa47njd1guo42gaqpm2775k465.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
