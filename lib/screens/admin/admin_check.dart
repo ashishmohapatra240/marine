@@ -54,7 +54,6 @@ class _AdminCheckState extends State<AdminCheck> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // pH value input
               TextField(
                 controller: pHController,
                 keyboardType: TextInputType.number,
