@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:marine/screens/admin/admin_add_event.dart';
+import 'package:marine/screens/admin/admin_check.dart';
 import 'package:marine/screens/admin/admin_homepage.dart';
 import 'package:marine/screens/small_fishery/add_fishpage.dart';
 import 'package:marine/screens/small_fishery/small_fishery_homepage.dart';
@@ -16,7 +17,7 @@ class _AdminDashboardState extends State<AdminDashboard> {
   bool alerted = false;
 
   int _page = 0;
-  List<Widget> pages = [AdminAddEventPage(), AdminHomePage()];
+  List<Widget> pages = [AdminAddEventPage(), AdminHomePage(), AdminCheck()];
 
   void updatePage(int page) {
     setState(() {
@@ -60,6 +61,19 @@ class _AdminDashboardState extends State<AdminDashboard> {
                 ),
               ),
               child: Icon(Icons.description_rounded),
+            ),
+            label: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Container(
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: _page == 2 ? Colors.grey : Colors.white,
+                  ),
+                ),
+              ),
+              child: Icon(Icons.medical_information),
             ),
             label: '',
           ),

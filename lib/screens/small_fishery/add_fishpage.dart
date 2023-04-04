@@ -30,19 +30,6 @@ class _AddFishPageState extends State<AddFishPage> {
     });
   }
 
-  // Future uploadImage() async {
-  //   if (_image != null) {
-  //     Reference storageReference =
-  //         FirebaseStorage.instance.ref().child('fishes/${DateTime.now()}.jpg');
-  //     UploadTask uploadTask = storageReference.putFile(_image!);
-  //     await uploadTask;
-  //     String fileURL = await storageReference.getDownloadURL();
-  //     _addFishDetails(fileURL);
-  //   } else {
-  //     _addFishDetails('');
-  //   }
-  // }
-
   void _addFishDetails() {
     FirebaseFirestore.instance.collection('fishes').add({
       'fishName': _fishNameController.text,

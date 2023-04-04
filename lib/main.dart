@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:velocity_x/velocity_x.dart';
 import 'package:marine/auth/login.dart';
 import 'package:marine/auth/registration.dart';
-import 'package:marine/ml/ml.dart';
 import 'package:marine/screens/admin/admin_add_event.dart';
 import 'package:marine/screens/admin/admin_dashboard.dart';
 import 'package:marine/screens/admin/admin_homepage.dart';
 import 'package:marine/screens/customer/customer_dashboard.dart';
 import 'package:marine/screens/customer/customer_eventpage.dart';
 import 'package:marine/screens/customer/customer_fish_marketplace.dart';
-import 'package:marine/screens/customer/customer_homepage.dart';
-
 import 'package:marine/screens/small_fishery/fishery_dashboard.dart';
 import 'package:marine/screens/small_fishery/small_fishery_grant.dart';
 import 'package:marine/screens/small_fishery/small_fishery_homepage.dart';
@@ -51,21 +49,21 @@ class MyApp extends StatelessWidget {
         primaryColor: Color(0xFF4264EC),
       ),
       routes: {
-        '/': (context) => RegistrationPage(),
-        '/admin-home': (context) => AdminHomePage(),
-        '/user-events': (context) => UserEventsPage(),
-        '/add-event': (context) => AdminAddEventPage(),
-        '/fish-marketplace': (context) => FishMarketplace(),
-        '/add-fish': (context) => AddFishPage(),
-        '/fishery-dashboard': (context) => FisheryDashboard(),
-        '/admin-dashboard': (context) => AdminDashboard(),
-        '/superadmin-dashboard': (context) => SuperAdminDashboard(),
-        '/dashboard': (context) => UserDashboard(),
-        '/small-fishery-grant': (context) => SmallFisheryGrantApplicationPage(),
-        '/small-fishery-form': (context) => SmallFisheryForm(),
-        '/super-admin-grant': (context) => SuperAdminGrantPage(),
-        '/super-admin': (context) => SuperAdminPage(),
+        '/': (context) => RegistrationPage().p16(),
+        '/admin-home': (context) => AdminHomePage().p16(),
+        '/user-events': (context) => UserEventsPage().p16(),
+        '/add-event': (context) => AdminAddEventPage().p16(),
+        '/fish-marketplace': (context) => FishMarketplace().p16(),
+        '/add-fish': (context) => AddFishPage().p16(),
+        '/fishery-dashboard': (context) => FisheryDashboard().p16(),
+        '/admin-dashboard': (context) => AdminDashboard().p16(),
+        '/superadmin-dashboard': (context) => SuperAdminDashboard().p16(),
+        '/dashboard': (context) => UserDashboard().p16(),
+        '/small-fishery-grant': (context) =>
+            SmallFisheryGrantApplicationPage().p16(),
+        '/superadmin-grant': (context) => SuperAdminGrantPage().p16(),
       },
+      initialRoute: _auth.currentUser != null ? '/dashboard' : '/',
     );
   }
 }

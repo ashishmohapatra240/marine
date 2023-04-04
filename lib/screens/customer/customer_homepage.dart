@@ -151,39 +151,6 @@ class CustomerHomePage extends StatelessWidget {
 
                         Widget eventWidget = Padding(
                             padding: const EdgeInsets.all(8.0),
-
-                            // child: Container(
-                            //   width: 150.0,
-                            //   decoration: BoxDecoration(
-                            //     borderRadius: BorderRadius.circular(8.0),
-                            //     color: Colors.grey[300],
-                            //   ),
-                            //   child: Column(
-                            //     crossAxisAlignment: CrossAxisAlignment.start,
-                            //     children: [
-                            //       Expanded(
-                            //         child: Image.network(
-                            //           'https://picsum.photos/200',
-                            //           fit: BoxFit.cover,
-                            //           width: double.infinity,
-                            //         ),
-                            //       ),
-                            //       SizedBox(height: 8.0),
-                            //       Text(
-                            //         eventName!,
-                            //         style: Theme.of(context).textTheme.subtitle1,
-                            //       ),
-                            //       Text(
-                            //         eventLocation!,
-                            //         style: Theme.of(context).textTheme.subtitle2,
-                            //       ),
-                            //       Text(
-                            //         eventDate!,
-                            //         style: Theme.of(context).textTheme.subtitle2,
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
                             child: Container(
                               width: 300,
                               height: 158,

@@ -4,9 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class SmallFisheryForm extends StatefulWidget {
   String routeName = '/fishery_homepage';
-
   SmallFisheryForm({Key? key}) : super(key: key);
-
   @override
   _SmallFisheryFormState createState() => _SmallFisheryFormState();
 }

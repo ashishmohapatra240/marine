@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:marine/auth/login.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
@@ -60,128 +61,119 @@ class _RegistrationPageState extends State<RegistrationPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Form(
+        body: VStack([
+          Spacer(),
+          "Register".text.color(Color(0xff757575)).size(20).makeCentered(),
+          16.heightBox,
+          Form(
             key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Spacer(),
-                Center(
-                  child: Text(
-                    "Register",
-                    style: TextStyle(
-                      color: Color(0xff757575),
-                      fontSize: 20,
-                    ),
+            child: VStack([
+              TextFormField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                  labelText: 'Name',
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your name';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your email';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: _passwordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  labelText: 'Password',
+                ),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Please enter your password';
+                  }
+                  return null;
+                },
+              ),
+              DropdownButtonFormField(
+                value: _role,
+                items: [
+                  DropdownMenuItem(
+                    value: 'SuperAdmin',
+                    child: Text('SuperAdmin'),
                   ),
-                ),
-                TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(
-                    labelText: 'Name',
+                  DropdownMenuItem(
+                    value: 'Admin',
+                    child: Text('Admin'),
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your name';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Email',
+                  DropdownMenuItem(
+                    value: 'Fishery',
+                    child: Text('Fishery'),
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
+                  DropdownMenuItem(
+                    value: 'User',
+                    child: Text('User'),
                   ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  },
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    _role = value.toString();
+                  });
+                },
+                decoration: InputDecoration(
+                  labelText: 'Select Role',
                 ),
-                DropdownButtonFormField(
-                  value: _role,
-                  items: [
-                    DropdownMenuItem(
-                      value: 'SuperAdmin',
-                      child: Text('SuperAdmin'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Admin',
-                      child: Text('Admin'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Fishery',
-                      child: Text('Fishery'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'User',
-                      child: Text('User'),
-                    ),
-                  ],
-                  onChanged: (value) {
-                    setState(() {
-                      _role = value;
-                    });
-                  },
-                ),
-                SizedBox(height: 16.0),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0,
-                    primary: Color(0xFF4264EC),
-                  ),
-                  child: Text('Register'),
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      if (_role != null) {
-                        registerUser(
-                          _emailController.text,
-                          _passwordController.text,
-                        );
-                      } else {
-                        print('Please select a role');
-                      }
-                    }
-                  },
-                ),
-                Center(
-                  child: Row(
-                    children: [
-                      Text('Already have an account?'),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage()),
-                          );
-                        },
-                        child: Text('Sign In'),
-                      ),
-                    ],
-                  ),
-                ),
-                Spacer(),
-              ],
+                validator: (value) {
+                  if (value == null) {
+                    return 'Please select your role';
+                  }
+                  return null;
+                },
+              ),
+              16.heightBox,
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    registerUser(_emailController.text.trim(),
+                        _passwordController.text.trim());
+                  }
+                },
+                child: "Register".text.white.make(),
+              ).wFull(context)
+            ]),
+          ).p16().card.make(),
+          SizedBox(
+            height: 24,
+          ),
+          Center(
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+              },
+              child: "Already have an account?"
+                  .richText
+                  .semiBold
+                  .color(Color(0xff757575))
+                  .withTextSpanChildren([
+                " Login".textSpan.color(Color(0xff007AFF)).semiBold.make()
+              ]).make(),
             ),
           ),
-        ),
+          Spacer(),
+        ]),
       ),
     );
   }

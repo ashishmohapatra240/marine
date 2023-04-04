@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class AdminAddEventPage extends StatefulWidget {
   const AdminAddEventPage({Key? key}) : super(key: key);
@@ -22,18 +23,18 @@ class _AdminAddEventPageState extends State<AdminAddEventPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Event'),
+        title: 'Add Event'.text.make(),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
+      body: VStack(
+        [
+          Form(
+            key: _formKey,
+            child: VStack(
+              [
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Event Name'),
+                  decoration: InputDecoration(
+                    labelText: 'Event Name',
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a name for the event';
@@ -46,9 +47,11 @@ class _AdminAddEventPageState extends State<AdminAddEventPage> {
                     });
                   },
                 ),
-                SizedBox(height: 16.0),
+                16.heightBox,
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Description'),
+                  decoration: InputDecoration(
+                    labelText: 'Description',
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a description for the event';
@@ -61,9 +64,11 @@ class _AdminAddEventPageState extends State<AdminAddEventPage> {
                     });
                   },
                 ),
-                SizedBox(height: 16.0),
+                16.heightBox,
                 DropdownButtonFormField(
-                  decoration: InputDecoration(labelText: 'Event Type'),
+                  decoration: InputDecoration(
+                    labelText: 'Event Type',
+                  ),
                   value: _eventType,
                   items: [
                     DropdownMenuItem(
@@ -87,9 +92,11 @@ class _AdminAddEventPageState extends State<AdminAddEventPage> {
                     });
                   },
                 ),
-                SizedBox(height: 16.0),
+                16.heightBox,
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Cost per Person'),
+                  decoration: InputDecoration(
+                    labelText: 'Cost per Person',
+                  ),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -103,9 +110,11 @@ class _AdminAddEventPageState extends State<AdminAddEventPage> {
                     });
                   },
                 ),
-                SizedBox(height: 16.0),
+                16.heightBox,
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Available Time'),
+                  decoration: InputDecoration(
+                    labelText: 'Available Time',
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter the available time for the event';
@@ -118,12 +127,14 @@ class _AdminAddEventPageState extends State<AdminAddEventPage> {
                     });
                   },
                 ),
-                SizedBox(height: 16.0),
+                16.heightBox,
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Location'),
+                  decoration: InputDecoration(
+                    labelText: 'Location',
+                  ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter a location for the event';
+                      return 'Please enter the location for the event';
                     }
                     return null;
                   },
@@ -133,33 +144,34 @@ class _AdminAddEventPageState extends State<AdminAddEventPage> {
                     });
                   },
                 ),
-                SizedBox(height: 16.0),
+                32.heightBox,
                 ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      FirebaseFirestore.instance.collection('events').add({
-                        'name': _eventName,
+                      final event = {
+                        'eventName': _eventName,
                         'description': _description,
                         'eventType': _eventType,
                         'costPerPerson': _costPerPerson,
                         'availableTime': _availableTime,
                         'location': _location,
-                      }).then((value) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text('Event added successfully')));
-                      }).catchError((error) {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text('Failed to add event: $error')));
-                      });
+                      };
+                      await FirebaseFirestore.instance
+                          .collection('events')
+                          .add(event);
+                      context.showToast(msg: 'Event added successfully');
+                      Navigator.pop(context);
                     }
                   },
-                  child: Text('Add Event'),
+                  child: 'Add Event'.text.make(),
                 ),
               ],
+              crossAlignment: CrossAxisAlignment.stretch,
             ),
           ),
-        ),
-      ),
+        ],
+        alignment: MainAxisAlignment.center,
+      ).p16(),
     );
   }
 }
